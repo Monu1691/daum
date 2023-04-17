@@ -1,0 +1,102 @@
+/* variables */
+
+$color-site: #707070;
+$color-hover: #A16A5A;
+
+// @include common-transition(all 0.3s ease-out);
+@mixin common-transition($transition){
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	transition: $transition;
+}
+
+// @include box-shadow(10px 10px 5px 0px rgba(0,0,0,0.75));
+@mixin box-shadow($shadow) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	-ms-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+// @include transform();
+@mixin transform($transforms) {
+	-webkit-transform: $transforms;
+	-moz-transform: $transforms;
+	-ms-transform: $transforms;
+	transform: $transforms;
+}
+
+// @include d-flex;
+@mixin d-flex{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+// @include flex-wrap(wrap);
+@mixin flex-wrap($value){
+	-webkit-flex-wrap: $value;
+	-moz-flex-wrap: $value;
+	-ms-flex-wrap: $value;
+	-o-flex-wrap: $value;
+	flex-wrap: $value;
+}
+
+// @include justify-content(center);
+@mixin justify-content($value) {
+	-webkit-justify-content: $value;
+	-moz-justify-content: $value;
+	-ms-justify-content: $value;
+	-ms-flex-pack: $value;
+	justify-content: $value;
+}
+
+// @include align-items(center);
+@mixin align-items($value){
+	-webkit-box-align: $value;
+	-ms-flex-align: $value;
+	-webkit-align-items: $value;
+	-moz-align-items: $value;
+	align-items: $value;
+}
+
+// @include flex-direction(column);
+@mixin flex-direction($value){
+	-webkit-box-orient: $value;
+	-moz-box-orient: $value;
+	-webkit-flex-direction: $value;
+	-moz-flex-direction: $value;
+	-ms-flex-direction: $value;
+	flex-direction: $value;
+}
+
+// @include order($value);
+@mixin order($value) {
+	-webkit-box-ordinal-group: $value;
+	-moz-box-ordinal-group: $value;
+	-ms-flex-order: $value;
+	-webkit-order: $value;
+	-moz-order: $value;
+	order: $value;
+}
+
+// @include flex-grow($value);
+@mixin flex-grow($value) {
+	-webkit-flex-grow: $value;
+	-webkit-box-flex: $value;
+	-moz-flex-grow: $value;
+	-ms-flex-positive: $value;
+	flex-grow: $value;
+}
+
+// @include flex-shrink($value);
+@mixin flex-shrink($value) {
+	-webkit-flex-shrink: $value;
+	-webkit-box-flex: $value;
+	-moz-flex-shrink: $value;
+	-ms-flex-negative: $value;
+	flex-shrink: $value;
+}

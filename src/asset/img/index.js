@@ -1,0 +1,1 @@
+export {default as spinLoader} from './ad-logo.png';

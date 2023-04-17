@@ -1,0 +1,136 @@
+/* footer style */
+
+.ad-footer-top-sec{
+	padding: 200px 0;
+	color: #fff;
+	background-color: #030303;
+	background-size: cover;
+	.ad-sub-title,
+	.ad-site-title{
+		color: #fff;
+	}
+}
+.subscribe-form{
+	margin-top: 40px;
+}
+.site_search_form {	
+	.search_input-bx{
+		width: 100%;
+		max-width: 500px;
+		display: inline-flex;
+		border-radius: 5px;
+		overflow: hidden;
+		input {
+			outline: none;
+			border: none;
+			width: 100%;
+			padding: 15px 15px;
+		}
+		.submit_btn{
+			outline: none;
+			border: none;
+			background-color: #030303;
+			color: #fff;
+			height: 60px;
+			padding: 15px 40px;
+		}
+	}
+}
+
+.ad-footer-main{
+	padding: 50px 0 70px;
+}
+.ad-footer-main-row{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 50px 40px;
+}
+.ad-footer-1{
+	.footer-logo{
+		margin-bottom: 20px;
+		max-width: 200px;
+	}
+	.txt{
+		max-width: 500px;
+		line-height: 30px;
+	}
+}
+.footer-title{
+	color: #000000;
+	font-size: 24px;
+	text-transform: capitalize;
+	margin-bottom: 25px;
+}
+.footer-list{
+	list-style: none;
+	li{
+		margin-bottom: 15px;
+		&:last-child{
+			margin-bottom: 0;
+		}
+	}
+}
+
+.footer-social-links{
+	display: flex;
+	column-gap: 16px;
+	color: #000;
+	ul{
+		display: flex;
+		column-gap: 16px;
+		a{
+			color: #000;
+			&:hover{
+				color: $color-hover;
+			}
+		}
+	}
+}
+
+.ad-footer-copyright{
+	color: #000;
+	padding: 34px 0;
+	border-top: 1px solid #CFCFCF;
+}
+.ad-copyright-row{
+	display: flex;
+	align-items: center;
+	gap: 20px 20px;
+}
+
+.scroll-top-top{
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 28px;
+	background-color: #000;
+	border: 1px solid $color-hover;
+	outline: none;
+	color: $color-hover;
+	text-align: center;
+	border-radius: 50px 50px 8px 8px;
+	
+	position: fixed;
+	right: 30px;
+	bottom: 80px;
+}
+
+
+@media screen and (min-width: 768px) {
+	.ad-footer-main-row{
+		grid-template-columns: 2.5fr 1fr 1fr;
+	}
+	.ad-copyright-row{
+		justify-content: space-between;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.ad-copyright-row{
+		flex-wrap: wrap;
+		> div{
+			width: 100%;
+			text-align: center;
+		}		
+	}
+}
