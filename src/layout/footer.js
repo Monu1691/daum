@@ -91,7 +91,7 @@ const Footer = () => {
 			</footer >
 
 			{visible && (
-				<button className="scroll-top-top" onClick={scrollToTop}><i class="fa-solid fa-jet-fighter-up"></i></button>
+				<button className="scroll-top-top" onClick={scrollToTop}><i className="fa-solid fa-jet-fighter-up"></i></button>
 			)}
 		</>
 	)

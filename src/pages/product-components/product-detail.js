@@ -1,6 +1,12 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { incNumber, decNumber} from '../../actions'
+
 
 const ProductDetail = () => {
+    const mtState  = useSelector((state)=> state.changeNumber);
+    const dispatch = useDispatch();
+
     return (
         <section className="products-sale-sec">
             <div className="products-sale-row">
@@ -74,9 +80,9 @@ const ProductDetail = () => {
                         </div>
 
                         <div className="ad-field-qty">
-                            <div className="increase-and-decrease minusqty" name="increase">-</div>
-                            <input type="number" name="qty" id="qty" min="0" value="1" title="Qty" className="input-text qty" />
-                            <div className="increase-and-decrease plusqty" name="decrease">+</div>
+                            <div className="increase-and-decrease minusqty" name="increase" onClick={()=> dispatch(decNumber(1))}>-</div>
+                            <input type="number" name="qty" id="qty" min="0" value={mtState} title="Qty" className="input-text qty" />
+                            <div className="increase-and-decrease plusqty" name="decrease" onClick={()=> dispatch(incNumber(1))}>+</div>
                         </div>
 
                         <div className="cart-btn-wrapp">

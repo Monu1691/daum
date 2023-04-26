@@ -46,13 +46,13 @@
     }
 }
 
-.ad-table-record{
+.ad-table-record {
     margin-top: 100px;
-    table{
+    table {
         width: 100%;
         border-collapse: collapse;
         font-size: 16px;
-        th{
+        th {
             text-transform: capitalize;
             padding: 10px 20px;
             color: $color-hover;
@@ -60,9 +60,20 @@
             border: 1px solid $color-hover;
             text-align: left;
         }
-        td{
+        td {
             padding: 10px 20px;
             border: 1px solid #000;
         }
+    }
+}
+
+.td-loading-col {
+    padding: 0 !important;
+    .ad-loader-wrapp {
+        position: static;
+        height: auto;
+        width: auto;
+        padding: 20px;
+        background: radial-gradient(circle, rgba(0, 1, 0, 1) 0%, rgb(230, 230, 246) 0%, rgba(25, 25, 24, 0) 100%, rgb(0, 212, 255) 100%);
     }
 }
