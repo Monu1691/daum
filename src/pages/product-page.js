@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 
 import AdLoader from '../layout/components/ad-loader'
+import ProductCard from './product-components/ProductCard';
 
 const ProductPage = () => {
 
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    
     useEffect(() => {
         const productsFunc = async () => {
             setIsLoading(true);
             const response = await fetch('https://fakestoreapi.com/products');
-            
+
             const res = await response.json();
             setProducts(res);
             setIsLoading(false);
@@ -20,7 +23,25 @@ const ProductPage = () => {
     }, []);
 
     if (isLoading) {
-        return <AdLoader/>;
+        return <AdLoader />;
+    }
+
+    const recordPerPage = 5;
+    const lastIndexPage = currentPage * recordPerPage;
+    const firstIndexPage = lastIndexPage - recordPerPage;
+
+    const records = products.slice(firstIndexPage / recordPerPage);
+    const nPage = Math.ceil(products.length / recordPerPage);
+    const numbers = [...Array(nPage + 1).keys()].slice(1);
+
+    const changeCPage = () =>{
+
+    }
+    const prePage = () =>{
+        setCurrentPage(records.id);
+    }
+    const nextPage = () =>{
+        
     }
 
     return (
@@ -30,29 +51,27 @@ const ProductPage = () => {
                 <section className="products-wrapp-section">
                     <div className="ad-container">
                         <div className="products-wrapp-row">
-                            {products.map((pData) => {
+                            {records.map((pData) => {
+                                const { id, image, price, category, title, description } = pData;
                                 return (
-                                    <div className="ad-product-card">
-                                        <div className="ad-img">
-                                            <img src={pData.image} alt="Product" />
-                                        </div>
-                                        <div className="ad-price">
-                                            <span className="actual-price"><i className="fa-solid fa-indian-rupee-sign"></i> 4095.00</span>
-                                            <span className="offer-price"><i className="fa-solid fa-indian-rupee-sign"></i> 1,995.00</span>
-                                        </div>
-                                        <div className="p-txt-wrapp">
-                                            <h6 className="ad-category">{pData.category}</h6>
-                                            <h4 className="ad-title">
-                                                {(pData.title.length > 30) ? pData.title.slice(0, 30) + '..' : pData.title}
-                                            </h4>
-                                            <p className="ad-txt">
-                                                {(pData.description.length > 150) ? pData.description.slice(0, 150) + '..' : pData.description}
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <>
+                                        <ProductCard key={id} image={image} actualPrice={price - 5} offerPrice={price} category={category} title={title} txt={description} />
+                                    </>
                                 )
                             })}
                         </div>
+
+                        <ul>
+                            <li><a href={()=> false} onClick={prePage}>Prev</a></li>
+                            {
+                                numbers.map((n, i) => {
+                                    return (
+                                        <li><a href={()=> false} key={i} onClick={changeCPage}>{n}</a></li>
+                                    );
+                                })
+                            }
+                            <li><a href={()=> false} onClick={nextPage}>Next</a></li>
+                        </ul>
                     </div>
                 </section>
 

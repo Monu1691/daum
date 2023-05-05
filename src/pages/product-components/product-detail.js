@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { incNumber, decNumber} from '../../actions'
+import { incNumber, decNumber, cartValue} from '../../actions'
 
 
 const ProductDetail = () => {
-    const mtState  = useSelector((state)=> state.changeNumber);
+    const {mtState}  = useSelector((state)=> state.changeNumber);
     const dispatch = useDispatch();
 
     return (
@@ -86,7 +86,7 @@ const ProductDetail = () => {
                         </div>
 
                         <div className="cart-btn-wrapp">
-                            <a href={() => false} className="ad-cart-btn add-to-cart">Add to cart</a>
+                            <a href={() => false} className="ad-cart-btn add-to-cart" onClick={()=> dispatch(cartValue(mtState))}>Add to cart</a>
                             <a href={() => false} className="ad-cart-btn buy-now">Buy now</a>
                         </div>
 

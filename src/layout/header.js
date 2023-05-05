@@ -1,8 +1,11 @@
 import React from 'react'
 import HeaderTop from './components/header-top'
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const {cartValue}  = useSelector((state)=> state.changeNumber);
+    
     return (
         <>
             <header className="site-header">
@@ -28,7 +31,7 @@ const Header = () => {
                                 <ul className="icon-list">
                                     <li><a href={() => false}><img src="./img/user.png" alt="user" /></a></li>
                                     <li><a href={() => false}><img src="./img/favorite.png" alt="favorite" /></a></li>
-                                    <li><a href={() => false}><img src="./img/bucket.png" alt="bucket" /></a></li>
+                                    <li><a href={() => false}><img src="./img/bucket.png" alt="bucket" /> {cartValue}</a></li>
                                 </ul>
                             </div>
                         </div>

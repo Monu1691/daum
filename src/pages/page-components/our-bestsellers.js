@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import ProductCard from '../product-components/ProductCard';
 
 const OurBestsellers = () => {
     const [bestSellerData, setBestSellerData] = useState([]);
@@ -22,22 +22,11 @@ const OurBestsellers = () => {
                 <div className="ad-product-slider">
 
                     {bestSellerData.slice(0, 8).map((bestSellerVal) => {
+                        const {id, image, price, title, description} = bestSellerVal;
                         return (
-                            <div className="ad-product-card" >
-                                <div className="ad-img">
-                                    <img src={bestSellerVal.image} alt="Product" />
-                                </div>
-                                <div className="ad-price">
-                                    <span className="actual-price"><i className="fa-solid fa-indian-rupee-sign"></i> {bestSellerVal.price}</span>
-                                    <span className="offer-price"><i className="fa-solid fa-indian-rupee-sign"></i> {bestSellerVal.price}</span>
-                                </div>
-                                <h4 className="ad-title">
-                                    {(bestSellerVal.title.length > 50) ? bestSellerVal.title.slice(0, 50)+'...' : bestSellerVal.title}
-                                </h4>
-                                <p className="ad-txt">
-                                    {(bestSellerVal.description.length > 150) ? bestSellerVal.description.slice(0, 150) + '...' : bestSellerVal.description}
-                                </p>
-                            </div>
+                            <>
+                            <ProductCard key={id} image={image} actualPrice={price - 5} offerPrice={price} title={title} txt={description} />
+                            </>
                         )
                     })}
 
