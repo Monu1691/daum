@@ -4,12 +4,15 @@ import AdLoader from '../layout/components/ad-loader'
 import ProductCard from './product-components/ProductCard';
 
 const ProductPage = () => {
-
+    
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
-    const [currentPage, setCurrentPage] = useState(1);
     
+    // pagination 
+    const [pageData, setPageData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+
     useEffect(() => {
         const productsFunc = async () => {
             setIsLoading(true);
@@ -20,28 +23,39 @@ const ProductPage = () => {
             setIsLoading(false);
         }
         productsFunc();
-    }, []);
+    }, [page]);
+
+    const Limit = 8;
+    useEffect(()=>{
+        const pageDataCount = Math.ceil(products.length/Limit);
+        setPageCount(pageDataCount); 
+
+        if(page){
+            const skip = Limit * page;
+            const dataSkip = products.slice(page === 1 ? 0 : skip - Limit,skip);
+            setPageData(dataSkip);
+        }
+
+    }, [products, page]);
+
+    // handle pagination
+    const handlePrev = () =>{
+        if (page === 1){
+            return page;
+        }else{
+            setPage(page - 1);
+        }
+    }
+    const handleNext = () =>{
+        if (page === pageCount){
+            return page;
+        }else{
+            setPage(page + 1);
+        }
+    }
 
     if (isLoading) {
         return <AdLoader />;
-    }
-
-    const recordPerPage = 5;
-    const lastIndexPage = currentPage * recordPerPage;
-    const firstIndexPage = lastIndexPage - recordPerPage;
-
-    const records = products.slice(firstIndexPage / recordPerPage);
-    const nPage = Math.ceil(products.length / recordPerPage);
-    const numbers = [...Array(nPage + 1).keys()].slice(1);
-
-    const changeCPage = () =>{
-
-    }
-    const prePage = () =>{
-        setCurrentPage(records.id);
-    }
-    const nextPage = () =>{
-        
     }
 
     return (
@@ -51,26 +65,26 @@ const ProductPage = () => {
                 <section className="products-wrapp-section">
                     <div className="ad-container">
                         <div className="products-wrapp-row">
-                            {records.map((pData) => {
-                                const { id, image, price, category, title, description } = pData;
+                            {pageData.map((pData, i) => {
+                                const { image, price, category, title, description } = pData;
                                 return (
                                     <>
-                                        <ProductCard key={id} image={image} actualPrice={price - 5} offerPrice={price} category={category} title={title} txt={description} />
+                                        <ProductCard key={i} image={image} actualPrice={price - 5} offerPrice={price} category={category} title={title} txt={description} />
                                     </>
                                 )
                             })}
                         </div>
 
-                        <ul>
-                            <li><a href={()=> false} onClick={prePage}>Prev</a></li>
+                        <ul className="pagination-wrapp">
+                            <li><a href={()=> false} onClick={handlePrev} disabled={page === 1}>Prev</a></li>
                             {
-                                numbers.map((n, i) => {
+                                Array(pageCount).fill(null).map((n, i) => {
                                     return (
-                                        <li><a href={()=> false} key={i} onClick={changeCPage}>{n}</a></li>
+                                        <li><a href={()=> false} className={page === i + 1 ? 'active' : '' } onClick={()=> setPage(i+1)}>{i + 1}</a></li>
                                     );
                                 })
                             }
-                            <li><a href={()=> false} onClick={nextPage}>Next</a></li>
+                            <li><a href={()=> false} onClick={handleNext} disabled={page === pageCount}>Next</a></li>
                         </ul>
                     </div>
                 </section>

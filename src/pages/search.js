@@ -6,6 +6,11 @@ const Search = () => {
     const [serData, setSerData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    // pagination 
+    const [pageData, setPageData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
+
     const searchVal = (e) => {
         setSearch(e.target.value);
     }
@@ -23,6 +28,35 @@ const Search = () => {
             fetchData();
         }
     }, [search]);
+
+    const Limit = 10;
+    useEffect(()=>{
+        const pageDataCount = Math.ceil(serData.length/Limit);
+        setPageCount(pageDataCount); 
+
+        if(page){
+            const skip = Limit * page;
+            const dataSkip = serData.slice(page === 1 ? 0 : skip - Limit,skip);
+            setPageData(dataSkip);
+        }
+
+    }, [serData, page]);
+
+    // handle pagination
+    const handlePrev = () =>{
+        if (page === 1){
+            return page;
+        }else{
+            setPage(page - 1);
+        }
+    }
+    const handleNext = () =>{
+        if (page === pageCount){
+            return page;
+        }else{
+            setPage(page + 1);
+        }
+    }
 
     return (
         <>
@@ -51,7 +85,7 @@ const Search = () => {
                                         </tr>
                                     </>
                                     :
-                                    serData.map((item) => {
+                                    pageData.map((item) => {
                                         return (
                                             <tr key={item.id}>
                                                 <td>{item.name}</td>
@@ -62,6 +96,18 @@ const Search = () => {
                                     })
                             }
                         </table>
+
+                        <ul className="pagination-wrapp">
+                            <li><a href={()=> false} onClick={handlePrev} disabled={page === 1}>Prev</a></li>
+                            {
+                                Array(pageCount).fill(null).map((n, i) => {
+                                    return (
+                                        <li><a href={()=> false} className={page === i + 1 ? 'active' : '' } onClick={()=> setPage(i+1)}>{i + 1}</a></li>
+                                    );
+                                })
+                            }
+                            <li><a href={()=> false} onClick={handleNext} disabled={page === pageCount}>Next</a></li>
+                        </ul>
 
                     </div>
                 </div>
